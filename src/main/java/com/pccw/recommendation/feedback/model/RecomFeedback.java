@@ -2,7 +2,7 @@ package com.pccw.recommendation.feedback.model;
 
 public class RecomFeedback {
 
-	private String feedbackId;
+	private int feedbackId;
 	private String feedbackDttm;
 	private String feedbackSystem;
 	private String recommmendationSourceSystem;
@@ -23,10 +23,10 @@ public class RecomFeedback {
 	private String channelName;
 	private String enabledFlag;
 	
-	public String getFeedbackId() {
+	public int getFeedbackId() {
 		return feedbackId;
 	}
-	public void setFeedbackId(String feedbackId) {
+	public void setFeedbackId(int feedbackId) {
 		this.feedbackId = feedbackId;
 	}
 	public String getFeedbackDttm() {

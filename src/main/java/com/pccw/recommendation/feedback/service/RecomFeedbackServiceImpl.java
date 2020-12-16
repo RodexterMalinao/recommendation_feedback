@@ -24,7 +24,7 @@ public class RecomFeedbackServiceImpl implements RecomFeedbackService {
 
 			RecomFeedback recomFeedback = new RecomFeedback();
 
-			recomFeedback.setFeedbackId(DataTypeUtil.integerAsString(data.get("feedback_id")));
+			recomFeedback.setFeedbackId(DataTypeUtil.stringAsInteger(data.get("feedback_id")));
 			recomFeedback.setFeedbackDttm(DataTypeUtil.dateAsString(data.get("feedback_dttm"),"MM-dd-yyyy"));
 			recomFeedback.setFeedbackSystem(data.get("feedback_system"));
 			recomFeedback.setRecommmendationSourceSystem(data.get("recommmendation_source_system"));

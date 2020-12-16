@@ -32,8 +32,12 @@ public final class DataTypeUtil {
 		String dateAsString = sdf.format(date);
 		return dateAsString;
 	}
-	
+
 	public static String integerAsString(Object num) {
 		return String.valueOf(num);
+	}
+
+	public static int stringAsInteger(Object val) {
+		return Integer.valueOf(val.toString());
 	}
 }
