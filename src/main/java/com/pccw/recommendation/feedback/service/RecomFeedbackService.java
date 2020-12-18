@@ -17,8 +17,14 @@ public interface RecomFeedbackService {
 	 *
 	 * @return a string greetings
 	 */
-	public List<RecomFeedback> getRecomFeedback(Exchange xchg);
+	public List<RecomFeedback> retrieveRecomFeedback(Exchange xchg);
 
 	public void insertRecomFeedback(Exchange xchg);
+
+	public void returnId(Exchange xchg);
+
+	public void returnRecomFeedbackListByCust(Exchange xchg);
+
+	public void printResponseMessage(Exchange xchg);
 
 }

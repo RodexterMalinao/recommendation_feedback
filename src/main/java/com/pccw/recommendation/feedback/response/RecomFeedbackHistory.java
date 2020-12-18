@@ -1,8 +1,7 @@
-package com.pccw.recommendation.feedback.model;
+package com.pccw.recommendation.feedback.response;
 
-public class RecomFeedback {
+public class RecomFeedbackHistory {
 
-	private int feedbackId;
 	private String feedbackDttm;
 	private String feedbackSystem;
 	private String recommendationSourceSystem;
@@ -22,14 +21,6 @@ public class RecomFeedback {
 	private String channelCode;
 	private String channelName;
 	private String enabledFlag;
-
-	public int getFeedbackId() {
-		return feedbackId;
-	}
-
-	public void setFeedbackId(int feedbackId) {
-		this.feedbackId = feedbackId;
-	}
 
 	public String getFeedbackDttm() {
 		return feedbackDttm;
@@ -185,14 +176,14 @@ public class RecomFeedback {
 
 	@Override
 	public String toString() {
-		return "RecomFeedback [feedbackId=" + feedbackId + ", feedbackDttm=" + feedbackDttm + ", feedbackSystem="
-				+ feedbackSystem + ", recommmendationSourceSystem=" + recommendationSourceSystem
-				+ ", recommendedOffer=" + recommendedOffer + ", feedbackType=" + feedbackType + ", feedbackReason="
-				+ feedbackReason + ", customerType=" + customerType + ", clubId=" + clubId + ", mobileNumber="
-				+ mobileNumber + ", fsa=" + fsa + ", serviceNumber=" + serviceNumber + ", customerNumber="
-				+ customerNumber + ", staffId=" + staffId + ", staffName=" + staffName + ", teamId=" + teamId
-				+ ", teamName=" + teamName + ", channelCode=" + channelCode + ", channelName=" + channelName
-				+ ", enabledFlag=" + enabledFlag + "]";
+		return "RecomFeedbackHistory [feedbackDttm=" + feedbackDttm + ", feedbackSystem=" + feedbackSystem
+				+ ", recommmendationSourceSystem=" + recommendationSourceSystem + ", recommendedOffer="
+				+ recommendedOffer + ", feedbackType=" + feedbackType + ", feedbackReason=" + feedbackReason
+				+ ", customerType=" + customerType + ", clubId=" + clubId + ", mobileNumber=" + mobileNumber + ", fsa="
+				+ fsa + ", serviceNumber=" + serviceNumber + ", customerNumber=" + customerNumber + ", staffId="
+				+ staffId + ", staffName=" + staffName + ", teamId=" + teamId + ", teamName=" + teamName
+				+ ", channelCode=" + channelCode + ", channelName=" + channelName + ", enabledFlag=" + enabledFlag
+				+ "]";
 	}
 
 }
