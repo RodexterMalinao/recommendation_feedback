@@ -39,7 +39,7 @@ public class RecomFeedbackRoute extends RouteBuilder {
 		rest("/retrieve").get().outType(RecomFeedback.class).to("direct:select");
 
 		rest("/insert").post().param().name("feedbackHistory").type(RestParamType.query).required(true).endParam()
-				.produces(MediaType.APPLICATION_JSON_VALUE).type(RecomFeedback.class).route().to("direct:setHeader")
+				.produces(MediaType.APPLICATION_JSON_VALUE).type(RecomFeedbackPost.class).route().to("direct:setHeader")
 				.routeId("postRecomFeedbackRoute").log("--- binded ${body} ---").multicast()
 				.to("direct:insert", "direct:getReturnId");
 
@@ -55,7 +55,7 @@ public class RecomFeedbackRoute extends RouteBuilder {
 
 		from("direct:setHeader").process(new Processor() {
 			public void process(Exchange xchg) throws Exception {
-				RecomFeedback recomFeedback = xchg.getIn().getBody(RecomFeedback.class);
+				RecomFeedbackPost recomFeedback = xchg.getIn().getBody(RecomFeedbackPost.class);
 				xchg.getIn().setHeader("clubId", recomFeedback.getClubId());
 				xchg.getIn().setHeader("mobileNumber", recomFeedback.getMobileNumber());
 				xchg.getIn().setHeader("FSA", recomFeedback.getFsa());

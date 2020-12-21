@@ -8,6 +8,7 @@ import org.apache.camel.Exchange;
 import org.springframework.stereotype.Service;
 
 import com.pccw.recommendation.feedback.model.RecomFeedback;
+import com.pccw.recommendation.feedback.model.RecomFeedbackPost;
 import com.pccw.recommendation.feedback.response.Data;
 import com.pccw.recommendation.feedback.response.RecomFeedbackHistory;
 import com.pccw.recommendation.feedback.response.ResponseMessage;
@@ -56,14 +57,31 @@ public class RecomFeedbackServiceImpl implements RecomFeedbackService {
 
 	@Override
 	public void insertRecomFeedback(Exchange xchg) {
-		RecomFeedback recomFeedback = xchg.getIn().getBody(RecomFeedback.class);
 
-		System.out.println("recomFeedback.getFeedbackDttm() : " + recomFeedback.getFeedbackDttm());
-		String query = "INSERT INTO recommendation_feedback(feedback_dttm," + "feedback_system,"
-				+ "recommendation_source_system," + "recommended_offer," + "feedback_type," + "feedback_reason,"
-				+ "customer_type," + "club_id," + "mobile_number," + "fsa," + "service_number," + "customer_number,"
-				+ "staff_id," + "staff_name," + "team_id," + "team_name," + "channel_code," + "channel_name,"
-				+ "enabled_flag)" + "values('" + recomFeedback.getFeedbackDttm() + "','"
+		RecomFeedbackPost recomFeedbackPost = xchg.getIn().getBody(RecomFeedbackPost.class);
+		RecomFeedback recomFeedback = new RecomFeedback();
+		recomFeedback.setFeedbackSystem(recomFeedbackPost.getFeedbackSystem());
+		recomFeedback.setRecommendationSourceSystem(recomFeedbackPost.getRecommendationSourceSystem());
+		recomFeedback.setRecommendedOffer(recomFeedbackPost.getRecommendedOffer());
+		recomFeedback.setFeedbackType(recomFeedbackPost.getFeedbackType());
+		recomFeedback.setFeedbackReason(recomFeedbackPost.getFeedbackReason());
+		recomFeedback.setCustomerType(recomFeedbackPost.getCustomerType());
+		recomFeedback.setClubId(recomFeedbackPost.getClubId());
+		recomFeedback.setMobileNumber(recomFeedbackPost.getMobileNumber());
+		recomFeedback.setFsa(recomFeedbackPost.getFsa());
+		recomFeedback.setServiceNumber(recomFeedbackPost.getServiceNumber());
+		recomFeedback.setCustomerNumber(recomFeedbackPost.getCustomerNumber());
+		recomFeedback.setStaffId(recomFeedbackPost.getStaffId());
+		recomFeedback.setStaffName(recomFeedbackPost.getStaffName());
+		recomFeedback.setTeamId(recomFeedbackPost.getTeamId());
+		recomFeedback.setTeamName(recomFeedbackPost.getTeamName());
+		recomFeedback.setChannelCode(recomFeedbackPost.getChannelCode());
+		recomFeedback.setChannelName(recomFeedbackPost.getChannelName());
+
+		String query = "INSERT INTO recommendation_feedback(feedback_system," + "recommendation_source_system,"
+				+ "recommended_offer," + "feedback_type," + "feedback_reason," + "customer_type," + "club_id,"
+				+ "mobile_number," + "fsa," + "service_number," + "customer_number," + "staff_id," + "staff_name,"
+				+ "team_id," + "team_name," + "channel_code," + "channel_name)" + "values('"
 				+ recomFeedback.getFeedbackSystem() + "','" + recomFeedback.getRecommendationSourceSystem() + "','"
 				+ recomFeedback.getRecommendedOffer() + "','" + recomFeedback.getFeedbackType() + "','"
 				+ recomFeedback.getFeedbackReason() + "','" + recomFeedback.getCustomerType() + "','"
@@ -71,7 +89,7 @@ public class RecomFeedbackServiceImpl implements RecomFeedbackService {
 				+ "','" + recomFeedback.getServiceNumber() + "','" + recomFeedback.getCustomerNumber() + "','"
 				+ recomFeedback.getStaffId() + "','" + recomFeedback.getStaffName() + "','" + recomFeedback.getTeamId()
 				+ "','" + recomFeedback.getTeamName() + "','" + recomFeedback.getChannelCode() + "','"
-				+ recomFeedback.getChannelName() + "','" + recomFeedback.getEnabledFlag() + "')";
+				+ recomFeedback.getChannelName() + "')";
 //		System.out.println("query roy : " + query);
 		xchg.getIn().setBody(query);
 		System.out.println("getIn : " + xchg.getIn().getBody());
@@ -80,7 +98,25 @@ public class RecomFeedbackServiceImpl implements RecomFeedbackService {
 
 	@Override
 	public void returnId(Exchange xchg) {
-		RecomFeedback recomFeedback = xchg.getIn().getBody(RecomFeedback.class);
+		RecomFeedbackPost recomFeedbackPost = xchg.getIn().getBody(RecomFeedbackPost.class);
+		RecomFeedback recomFeedback = new RecomFeedback();
+		recomFeedback.setFeedbackSystem(recomFeedbackPost.getFeedbackSystem());
+		recomFeedback.setRecommendationSourceSystem(recomFeedbackPost.getRecommendationSourceSystem());
+		recomFeedback.setRecommendedOffer(recomFeedbackPost.getRecommendedOffer());
+		recomFeedback.setFeedbackType(recomFeedbackPost.getFeedbackType());
+		recomFeedback.setFeedbackReason(recomFeedbackPost.getFeedbackReason());
+		recomFeedback.setCustomerType(recomFeedbackPost.getCustomerType());
+		recomFeedback.setClubId(recomFeedbackPost.getClubId());
+		recomFeedback.setMobileNumber(recomFeedbackPost.getMobileNumber());
+		recomFeedback.setFsa(recomFeedbackPost.getFsa());
+		recomFeedback.setServiceNumber(recomFeedbackPost.getServiceNumber());
+		recomFeedback.setCustomerNumber(recomFeedbackPost.getCustomerNumber());
+		recomFeedback.setStaffId(recomFeedbackPost.getStaffId());
+		recomFeedback.setStaffName(recomFeedbackPost.getStaffName());
+		recomFeedback.setTeamId(recomFeedbackPost.getTeamId());
+		recomFeedback.setTeamName(recomFeedbackPost.getTeamName());
+		recomFeedback.setChannelCode(recomFeedbackPost.getChannelCode());
+		recomFeedback.setChannelName(recomFeedbackPost.getChannelName());
 		System.out.println("recomFeedback : " + xchg.getIn().getBody());
 		String query = "SELECT feedback_id FROM recommendation_feedback WHERE club_id = " + "'"
 				+ recomFeedback.getClubId() + "'" + " and mobile_number = " + "'" + recomFeedback.getMobileNumber()
@@ -96,8 +132,7 @@ public class RecomFeedbackServiceImpl implements RecomFeedbackService {
 				+ " and staff_name =" + "'" + recomFeedback.getStaffName() + "'" + " and team_id =" + "'"
 				+ recomFeedback.getTeamId() + "'" + " and team_name =" + "'" + recomFeedback.getTeamName() + "'"
 				+ " and channel_code =" + "'" + recomFeedback.getChannelCode() + "'" + " and channel_name =" + "'"
-				+ recomFeedback.getChannelName() + "'" + " and enabled_flag =" + "'" + recomFeedback.getEnabledFlag()
-				+ "' ORDER BY feedback_id DESC LIMIT 1";
+				+ recomFeedback.getChannelName() + "' ORDER BY feedback_id DESC LIMIT 1";
 		xchg.getIn().setBody(query);
 		System.out.println("getIn : " + xchg.getIn().getBody());
 	}
