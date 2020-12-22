@@ -23,6 +23,58 @@ public class RecomFeedback {
 	private String channelName;
 	private String enabledFlag;
 
+	public RecomFeedback(RecomFeedbackPost recomFeedbackPost) {
+		this.setFeedbackSystem(recomFeedbackPost.getFeedbackSystem());
+		this.setRecommendationSourceSystem(recomFeedbackPost.getRecommendationSourceSystem());
+		this.setRecommendedOffer(recomFeedbackPost.getRecommendedOffer());
+		this.setFeedbackType(recomFeedbackPost.getFeedbackType());
+		this.setFeedbackReason(recomFeedbackPost.getFeedbackReason());
+		this.setCustomerType(recomFeedbackPost.getCustomerType());
+		this.setClubId(recomFeedbackPost.getClubId());
+		this.setMobileNumber(recomFeedbackPost.getMobileNumber());
+		this.setFsa(recomFeedbackPost.getFsa());
+		this.setServiceNumber(recomFeedbackPost.getServiceNumber());
+		this.setCustomerNumber(recomFeedbackPost.getCustomerNumber());
+		this.setStaffId(recomFeedbackPost.getStaffId());
+		this.setStaffName(recomFeedbackPost.getStaffName());
+		this.setTeamId(recomFeedbackPost.getTeamId());
+		this.setTeamName(recomFeedbackPost.getTeamName());
+		this.setChannelCode(recomFeedbackPost.getChannelCode());
+		this.setChannelName(recomFeedbackPost.getChannelName());
+	}
+
+	public RecomFeedback(int feedbackId, String feedbackDttm, String feedbackSystem, String recommendationSourceSystem,
+			String recommendedOffer, String feedbackType, String feedbackReason, String customerType, String clubId,
+			String mobileNumber, String fsa, String serviceNumber, String customerNumber, String staffId,
+			String staffName, String teamId, String teamName, String channelCode, String channelName,
+			String enabledFlag) {
+		super();
+		this.feedbackId = feedbackId;
+		this.feedbackDttm = feedbackDttm;
+		this.feedbackSystem = feedbackSystem;
+		this.recommendationSourceSystem = recommendationSourceSystem;
+		this.recommendedOffer = recommendedOffer;
+		this.feedbackType = feedbackType;
+		this.feedbackReason = feedbackReason;
+		this.customerType = customerType;
+		this.clubId = clubId;
+		this.mobileNumber = mobileNumber;
+		this.fsa = fsa;
+		this.serviceNumber = serviceNumber;
+		this.customerNumber = customerNumber;
+		this.staffId = staffId;
+		this.staffName = staffName;
+		this.teamId = teamId;
+		this.teamName = teamName;
+		this.channelCode = channelCode;
+		this.channelName = channelName;
+		this.enabledFlag = enabledFlag;
+	}
+
+	public RecomFeedback() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getFeedbackId() {
 		return feedbackId;
 	}
@@ -186,13 +238,13 @@ public class RecomFeedback {
 	@Override
 	public String toString() {
 		return "RecomFeedback [feedbackId=" + feedbackId + ", feedbackDttm=" + feedbackDttm + ", feedbackSystem="
-				+ feedbackSystem + ", recommmendationSourceSystem=" + recommendationSourceSystem
-				+ ", recommendedOffer=" + recommendedOffer + ", feedbackType=" + feedbackType + ", feedbackReason="
-				+ feedbackReason + ", customerType=" + customerType + ", clubId=" + clubId + ", mobileNumber="
-				+ mobileNumber + ", fsa=" + fsa + ", serviceNumber=" + serviceNumber + ", customerNumber="
-				+ customerNumber + ", staffId=" + staffId + ", staffName=" + staffName + ", teamId=" + teamId
-				+ ", teamName=" + teamName + ", channelCode=" + channelCode + ", channelName=" + channelName
-				+ ", enabledFlag=" + enabledFlag + "]";
+				+ feedbackSystem + ", recommmendationSourceSystem=" + recommendationSourceSystem + ", recommendedOffer="
+				+ recommendedOffer + ", feedbackType=" + feedbackType + ", feedbackReason=" + feedbackReason
+				+ ", customerType=" + customerType + ", clubId=" + clubId + ", mobileNumber=" + mobileNumber + ", fsa="
+				+ fsa + ", serviceNumber=" + serviceNumber + ", customerNumber=" + customerNumber + ", staffId="
+				+ staffId + ", staffName=" + staffName + ", teamId=" + teamId + ", teamName=" + teamName
+				+ ", channelCode=" + channelCode + ", channelName=" + channelName + ", enabledFlag=" + enabledFlag
+				+ "]";
 	}
 
 }

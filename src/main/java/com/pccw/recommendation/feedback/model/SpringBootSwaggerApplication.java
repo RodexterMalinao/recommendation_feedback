@@ -1,14 +1,14 @@
 package com.pccw.recommendation.feedback.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.camel.component.servlet.CamelHttpTransportServlet;
 import org.apache.camel.component.swagger.DefaultCamelSwaggerServlet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @SpringBootApplication
 public class SpringBootSwaggerApplication {

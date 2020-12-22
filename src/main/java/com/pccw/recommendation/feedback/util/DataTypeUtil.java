@@ -40,4 +40,5 @@ public final class DataTypeUtil {
 	public static int stringAsInteger(Object val) {
 		return Integer.valueOf(val.toString());
 	}
+	
 }

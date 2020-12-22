@@ -25,6 +25,10 @@ public interface RecomFeedbackService {
 
 	public void returnRecomFeedbackListByCust(Exchange xchg);
 
-	public void printResponseMessage(Exchange xchg);
+	public void printSuccessResponseMessage(Exchange xchg);
+
+	public void printErrorResponseMessage(Exchange xchg);
+
+	public boolean isRequestValid(Exchange xchg);
 
 }

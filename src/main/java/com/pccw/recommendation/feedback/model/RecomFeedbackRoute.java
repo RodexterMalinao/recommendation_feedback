@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
+import com.pccw.recommendation.feedback.response.ResponseMessage;
 import com.pccw.recommendation.feedback.service.RecomFeedbackService;
 import com.pccw.recommendation.feedback.service.RecomFeedbackServiceImpl;
 
@@ -38,10 +39,14 @@ public class RecomFeedbackRoute extends RouteBuilder {
 
 		rest("/retrieve").get().outType(RecomFeedback.class).to("direct:select");
 
+//		rest("/insert").post().param().name("feedbackHistory").type(RestParamType.query).required(true).endParam()
+//				.produces(MediaType.APPLICATION_JSON_VALUE).type(RecomFeedbackPost.class).route().to("direct:setHeader")
+//				.routeId("postRecomFeedbackRoute").log("--- binded ${body} ---").multicast()
+//				.to("direct:insert", "direct:getReturnId");
+//		
 		rest("/insert").post().param().name("feedbackHistory").type(RestParamType.query).required(true).endParam()
 				.produces(MediaType.APPLICATION_JSON_VALUE).type(RecomFeedbackPost.class).route().to("direct:setHeader")
-				.routeId("postRecomFeedbackRoute").log("--- binded ${body} ---").multicast()
-				.to("direct:insert", "direct:getReturnId");
+				.routeId("postRecomFeedbackRoute").log("--- binded ${body} ---").to("direct:validate");
 
 		from("direct:select").setBody(constant("select * from recommendation_feedback")).to("jdbc:dataSource")
 				.process(new Processor() {
@@ -64,14 +69,29 @@ public class RecomFeedbackRoute extends RouteBuilder {
 			}
 		});
 
+		/** Validate request */
+		from("direct:validate").process(new Processor() {
+			public void process(Exchange xchg) throws Exception {
+				xchg.getIn().setHeader("isValid", recomFeedbackService.isRequestValid(xchg));
+				log.info("body : " + xchg.getIn().getBody());
+				log.info("validate");
+			}
+		}).choice().when(header("isValid")).to("direct:insertValidated").otherwise()
+				.to("direct:printErrorResponseMessage");
+
+		from("direct:insertValidated").multicast().to("direct:insert", "direct:getReturnId");
+
+		/** Insert the record */
 		from("direct:insert").process(new Processor() {
 			public void process(Exchange xchg) throws Exception {
 				recomFeedbackService.insertRecomFeedback(xchg);
 			}
 		}).to("jdbc:dataSource");
 
+		/** Get return id */
 		from("direct:getReturnId").process(new Processor() {
 			public void process(Exchange xchg) throws Exception {
+				log.info("isValid : " + xchg.getIn().getHeader("isValid"));
 				recomFeedbackService.returnId(xchg);
 			}
 		}).to("jdbc:dataSource").process(new Processor() {
@@ -81,21 +101,30 @@ public class RecomFeedbackRoute extends RouteBuilder {
 				log.info("feedbackId : " + xchg.getIn().getHeader("feedbackId"));
 			}
 		}).choice().when(header("feedbackHistory").isEqualTo("T")).to("direct:getFeedbackHistory").endChoice()
-				.otherwise().to("direct:printResponseMessage");
+				.otherwise().to("direct:printSuccessResponseMessage");
 
+		/** Get feedback history */
 		from("direct:getFeedbackHistory").process(new Processor() {
 			public void process(Exchange xchg) throws Exception {
 				recomFeedbackService.returnRecomFeedbackListByCust(xchg);
 				log.info("direct:getFeedbackHistory : ok ");
 			}
-		}).to("jdbc:dataSource").to("direct:printResponseMessage");
+		}).to("jdbc:dataSource").to("direct:printSuccessResponseMessage");
 
-		from("direct:printResponseMessage").process(new Processor() {
+		/** Print success response message */
+		from("direct:printSuccessResponseMessage").process(new Processor() {
 			public void process(Exchange xchg) throws Exception {
 				log.info("feedbackId : " + xchg.getIn().getHeader("feedbackId"));
-				recomFeedbackService.printResponseMessage(xchg);
+				recomFeedbackService.printSuccessResponseMessage(xchg);
 			}
 		});
+
+		/** Print error response message */
+		from("direct:printErrorResponseMessage").process(new Processor() {
+			public void process(Exchange xchg) throws Exception {
+				recomFeedbackService.printErrorResponseMessage(xchg);
+			}
+		}).setHeader(Exchange.HTTP_RESPONSE_CODE, constant(600));
 	}
 }
 

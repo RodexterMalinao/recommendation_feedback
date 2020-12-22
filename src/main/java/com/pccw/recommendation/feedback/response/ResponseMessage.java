@@ -3,7 +3,9 @@ package com.pccw.recommendation.feedback.response;
 public class ResponseMessage {
 
 	private String status;
+	private String success;
 	private String message;
+
 	private Data data;
 
 	public String getStatus() {
@@ -12,6 +14,14 @@ public class ResponseMessage {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(String success) {
+		this.success = success;
 	}
 
 	public String getMessage() {
