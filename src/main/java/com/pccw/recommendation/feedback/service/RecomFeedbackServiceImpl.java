@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.json.simple.JsonObject;
 import org.springframework.stereotype.Service;
 
 import com.pccw.recommendation.feedback.model.RecomFeedback;
@@ -34,7 +33,7 @@ public class RecomFeedbackServiceImpl extends RecomFeedbackUtil implements Recom
 			RecomFeedback recomFeedback = new RecomFeedback();
 
 			recomFeedback.setFeedbackId(DataTypeUtil.stringAsInteger(data.get(F_FEEDBACK_ID)));
-			recomFeedback.setFeedbackDttm(DataTypeUtil.dateAsString(data.get(F_FEEDBACK_DTTM), "yyyy-mm-dd hh:mm:ss"));
+			recomFeedback.setFeedbackDttm(DataTypeUtil.dateAsString(data.get(F_FEEDBACK_DTTM), DATE_FORMAT));
 			recomFeedback.setFeedbackSystem(data.get(F_FEEDBACK_SYSTEM));
 			recomFeedback.setRecommendationSourceSystem(data.get(F_RECOMMENDATION_SOURCE_SYSTEM));
 			recomFeedback.setRecommendedOffer(data.get(F_RECOMMENDED_OFFER));
@@ -133,6 +132,7 @@ public class RecomFeedbackServiceImpl extends RecomFeedbackUtil implements Recom
 				responseMessage.setData(data);
 				System.out.println("recomFeedbacks : " + recomFeedbacks);
 				xchg.getIn().setBody("INSERTED WITH FEEDBACK HISTORY : " + xchg.getIn().getBody());
+				break;
 			default:
 				responseMessage.setStatus("200");
 				responseMessage.setSuccess("true");
@@ -177,7 +177,7 @@ public class RecomFeedbackServiceImpl extends RecomFeedbackUtil implements Recom
 
 			RecomFeedbackHistory recomFeedback = new RecomFeedbackHistory();
 
-			recomFeedback.setFeedbackDttm(DataTypeUtil.dateAsString(data.get(F_FEEDBACK_DTTM), "yyyy-mm-dd hh:mm:ss"));
+			recomFeedback.setFeedbackDttm(DataTypeUtil.dateAsString(data.get(F_FEEDBACK_DTTM), DATE_FORMAT));
 			recomFeedback.setFeedbackSystem(data.get(F_FEEDBACK_SYSTEM));
 			recomFeedback.setRecommendationSourceSystem(data.get(F_RECOMMENDATION_SOURCE_SYSTEM));
 			recomFeedback.setRecommendedOffer(data.get(F_RECOMMENDED_OFFER));

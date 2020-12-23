@@ -33,6 +33,8 @@ public class RecomFeedbackUtil {
 	public static final String F_CHANNEL_NAME = "channel_name";
 	public static final String F_ENABLED_FLAG = "enabled_flag";
 
+	public static final String DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
+	
 	public static final ImmutableList<String> mandatoryFields = ImmutableList.of(F_STAFF_ID, F_STAFF_NAME,
 			F_FEEDBACK_SYSTEM, F_CUSTOMER_TYPE, F_RECOMMENDATION_SOURCE_SYSTEM, F_RECOMMENDED_OFFER, F_FEEDBACK_TYPE,
 			F_TEAM_ID, F_TEAM_NAME, F_CHANNEL_CODE, F_CHANNEL_NAME);
@@ -77,6 +79,7 @@ public class RecomFeedbackUtil {
 
 	public static String returnMessageForMandatoryValidation(RecomFeedback recomFeedback) {
 		List<String> invFields = new ArrayList<>();
+
 		if (StringUtils.isEmpty(recomFeedback.getStaffId())) {
 			invFields.add(F_STAFF_ID);
 		}

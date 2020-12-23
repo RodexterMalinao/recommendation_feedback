@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import com.pccw.recommendation.feedback.response.ResponseMessage;
 import com.pccw.recommendation.feedback.service.RecomFeedbackService;
 import com.pccw.recommendation.feedback.service.RecomFeedbackServiceImpl;
 
