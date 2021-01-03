@@ -6,10 +6,10 @@ public final class ErrorResponseUtil {
 
 	public static final HashMap<Integer, String> responseCodes = new HashMap<>();
 
-	public static final String STATUS_CODE_MANDATORY = "600";
+	public static final int STATUS_CODE_MANDATORY = 600;
 
 	static {
-		responseCodes.put(600, "The following fields are required : ");
+		responseCodes.put(STATUS_CODE_MANDATORY, "The following fields are required : ");
 //		responseCodes.put(3, "thirty");
 //		responseCodes.put(4, "forty");
 //		responseCodes.put(5, "fifty");

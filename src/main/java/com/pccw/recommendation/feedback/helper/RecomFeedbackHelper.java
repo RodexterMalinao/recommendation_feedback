@@ -1,4 +1,4 @@
-package com.pccw.recommendation.feedback.util;
+package com.pccw.recommendation.feedback.helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 import com.google.common.collect.ImmutableList;
 import com.pccw.recommendation.feedback.model.RecomFeedback;
 
-public class RecomFeedbackUtil {
+public class RecomFeedbackHelper extends SQLHelper {
 
 	public static final String T_RECOM_FB = "recommendation_feedback";
 
@@ -17,15 +17,15 @@ public class RecomFeedbackUtil {
 	public static final String F_FEEDBACK_ID = "feedback_id";
 	public static final String F_FEEDBACK_DTTM = "feedback_dttm";
 	public static final String F_FEEDBACK_SYSTEM = "feedback_system";
-	public static final String F_CUSTOMER_TYPE = "customer_type";
+	public static final String F_PRODUCT_LINES = "product_lines";
 	public static final String F_RECOMMENDATION_SOURCE_SYSTEM = "recommendation_source_system";
 	public static final String F_RECOMMENDED_OFFER = "recommended_offer";
 	public static final String F_FEEDBACK_TYPE = "feedback_type";
 	public static final String F_FEEDBACK_REASON = "feedback_reason";
 	public static final String F_CLUB_ID = "club_id";
-	public static final String F_MOBILE_NUMBER = "mobile_number";
-	public static final String F_FSA = "fsa";
-	public static final String F_SERVICE_NUMBER = "service_number";
+	public static final String F_PARENT_CUST_NUM = "parent_cust_num";
+	public static final String F_LINE_LEVEL_KEY = "line_level_key";
+	public static final String F_LINE_LEVEL_VALUE = "line_level_value";
 	public static final String F_CUSTOMER_NUMBER = "customer_number";
 	public static final String F_TEAM_ID = "team_id";
 	public static final String F_TEAM_NAME = "team_name";
@@ -34,9 +34,9 @@ public class RecomFeedbackUtil {
 	public static final String F_ENABLED_FLAG = "enabled_flag";
 
 	public static final String DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
-	
+
 	public static final ImmutableList<String> mandatoryFields = ImmutableList.of(F_STAFF_ID, F_STAFF_NAME,
-			F_FEEDBACK_SYSTEM, F_CUSTOMER_TYPE, F_RECOMMENDATION_SOURCE_SYSTEM, F_RECOMMENDED_OFFER, F_FEEDBACK_TYPE,
+			F_FEEDBACK_SYSTEM, F_PRODUCT_LINES, F_RECOMMENDATION_SOURCE_SYSTEM, F_RECOMMENDED_OFFER, F_FEEDBACK_TYPE,
 			F_TEAM_ID, F_TEAM_NAME, F_CHANNEL_CODE, F_CHANNEL_NAME);
 
 	public boolean isMandatoryValid(RecomFeedback recomFeedback) {
@@ -50,7 +50,7 @@ public class RecomFeedbackUtil {
 		if (StringUtils.isEmpty(recomFeedback.getFeedbackSystem())) {
 			return false;
 		}
-		if (StringUtils.isEmpty(recomFeedback.getCustomerType())) {
+		if (StringUtils.isEmpty(recomFeedback.getProductLines())) {
 			return false;
 		}
 		if (StringUtils.isEmpty(recomFeedback.getRecommendationSourceSystem())) {
@@ -89,8 +89,8 @@ public class RecomFeedbackUtil {
 		if (StringUtils.isEmpty(recomFeedback.getFeedbackSystem())) {
 			invFields.add(F_FEEDBACK_SYSTEM);
 		}
-		if (StringUtils.isEmpty(recomFeedback.getCustomerType())) {
-			invFields.add(F_CUSTOMER_TYPE);
+		if (StringUtils.isEmpty(recomFeedback.getProductLines())) {
+			invFields.add(F_PRODUCT_LINES);
 		}
 		if (StringUtils.isEmpty(recomFeedback.getRecommendationSourceSystem())) {
 			invFields.add(F_RECOMMENDATION_SOURCE_SYSTEM);

@@ -2,25 +2,25 @@ package com.pccw.recommendation.feedback.response;
 
 public class ResponseMessage {
 
-	private String status;
-	private String success;
+	private int status;
+	private boolean success;
 	private String message;
 
 	private Data data;
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
-	public String getSuccess() {
+	public boolean isSuccess() {
 		return success;
 	}
 
-	public void setSuccess(String success) {
+	public void setSuccess(boolean success) {
 		this.success = success;
 	}
 

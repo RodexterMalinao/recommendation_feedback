@@ -1,4 +1,4 @@
-package com.pccw.recommendation.feedback.model;
+package com.pccw.recommendation.feedback.App;
 
 import java.util.List;
 
@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
+import com.pccw.recommendation.feedback.model.RecomFeedback;
+import com.pccw.recommendation.feedback.model.RecomFeedbackPost;
 import com.pccw.recommendation.feedback.service.RecomFeedbackService;
 import com.pccw.recommendation.feedback.service.RecomFeedbackServiceImpl;
 
@@ -36,35 +38,41 @@ public class RecomFeedbackRoute extends RouteBuilder {
 	public void configure() {
 		restConfiguration().component("servlet").bindingMode(RestBindingMode.json);
 
-		rest("/retrieve").get().outType(RecomFeedback.class).to("direct:select");
+		rest("/retrieve").get().param().name("parentCustNum").type(RestParamType.query).required(true).endParam()
+				.param().name("productLines").type(RestParamType.query).required(true).endParam()
+				.outType(RecomFeedback.class).to("direct:select");
 
-//		rest("/insert").post().param().name("feedbackHistory").type(RestParamType.query).required(true).endParam()
-//				.produces(MediaType.APPLICATION_JSON_VALUE).type(RecomFeedbackPost.class).route().to("direct:setHeader")
-//				.routeId("postRecomFeedbackRoute").log("--- binded ${body} ---").multicast()
-//				.to("direct:insert", "direct:getReturnId");
-//		
 		rest("/insert").post().param().name("feedbackHistory").type(RestParamType.query).required(true).endParam()
 				.produces(MediaType.APPLICATION_JSON_VALUE).type(RecomFeedbackPost.class).route().to("direct:setHeader")
 				.routeId("postRecomFeedbackRoute").log("--- binded ${body} ---").to("direct:validate");
 
-		from("direct:select").setBody(constant("select * from recommendation_feedback")).to("jdbc:dataSource")
-				.process(new Processor() {
-					public void process(Exchange xchg) throws Exception {
-						log.info("Param Value = " + xchg.getIn().getHeader("feedbackHistory"));
-						xchg.getIn().getHeader("Value");
-						List<RecomFeedback> recomFeedbackList = recomFeedbackService.retrieveRecomFeedback(xchg);
-						xchg.getIn().setBody(recomFeedbackList);
-					}
-				});
+//		from("direct:select").setBody(constant("select * from recommendation_feedback")).to("jdbc:dataSource")
+//				.process(new Processor() {
+//					public void process(Exchange xchg) throws Exception {
+//						log.info("Param Value = " + xchg.getIn().getHeader("feedbackHistory"));
+//						xchg.getIn().getHeader("Value");
+//						List<RecomFeedback> recomFeedbackList = recomFeedbackService.retrieveRecomFeedback(xchg);
+//						xchg.getIn().setBody(recomFeedbackList);
+//					}
+//				});	
+
+		/** Select the record */
+		from("direct:select").process(new Processor() {
+			public void process(Exchange xchg) throws Exception {
+				recomFeedbackService.selectRecomFeedback(xchg);
+			}
+		}).to("jdbc:dataSource").process(new Processor() {
+			public void process(Exchange xchg) throws Exception {
+				List<RecomFeedback> recomFeedbackList = recomFeedbackService.retrieveRecomFeedback(xchg);
+				xchg.getIn().setBody(recomFeedbackList);
+			}
+		});
+		;
 
 		from("direct:setHeader").process(new Processor() {
 			public void process(Exchange xchg) throws Exception {
 				RecomFeedbackPost recomFeedback = xchg.getIn().getBody(RecomFeedbackPost.class);
-				xchg.getIn().setHeader("clubId", recomFeedback.getClubId());
-				xchg.getIn().setHeader("mobileNumber", recomFeedback.getMobileNumber());
-				xchg.getIn().setHeader("FSA", recomFeedback.getFsa());
-				xchg.getIn().setHeader("serviceNumber", recomFeedback.getServiceNumber());
-				xchg.getIn().setHeader("customerNumber", recomFeedback.getCustomerNumber());
+				xchg.getIn().setHeader("parentCustNum", recomFeedback.getParentCustNum());
 			}
 		});
 
@@ -126,29 +134,3 @@ public class RecomFeedbackRoute extends RouteBuilder {
 		}).setHeader(Exchange.HTTP_RESPONSE_CODE, constant(600));
 	}
 }
-
-//rest("/insert").post().produces(MediaType.APPLICATION_JSON_VALUE).type(RecomFeedback.class).route()
-//.routeId("postRecomFeedbackRoute").log("--- binded ${body} ---").to("direct:insert")
-//.setHeader(Exchange.HTTP_RESPONSE_CODE, constant(201)).setBody(constant(null));
-
-//from("direct:talk").process(exchange -> {
-//RecomFeedback p = new RecomFeedback();
-//p.setFirstname("Bennet");
-//p.setLastname("Schulz");
-//exchange.getIn().setBody(p);
-//});
-
-//rest("/cafe/menu").description("Recommendation Feedback")
-//.get("/items").description("Returns all menu items").outType(MenuItem[].class)
-//    .responseMessage().code(200).message("All of the menu items").endResponseMessage()
-//    .to("bean:menuService?method=getMenuItems")
-//.get("/items/{id}").description("Returns menu item with matching id").outType(MenuItem.class)
-//    .param().name("id").type(RestParamType.path).description("The id of the item").dataType("int").endParam()
-//    .responseMessage().code(200).message("The requested menu item").endResponseMessage()
-//    .responseMessage().code(404).message("Menu item not found").endResponseMessage()
-//    .to("bean:menuService?method=getMenuItem(${header.id})")
-//.post("/items").description("Creates a new menu item").type(MenuItem.class)
-//    .param().name("body").type(RestParamType.body).description("The item to create").endParam()
-//    .responseMessage().code(201).message("Successfully created menu item").endResponseMessage()
-//    .responseMessage().code(400).message("Invalid menu item").endResponseMessage()
-//    .route().to("bean:menuService?method=createMenuItem").setHeader(Exchange.HTTP_RESPONSE_CODE, constant(201)).endRest()

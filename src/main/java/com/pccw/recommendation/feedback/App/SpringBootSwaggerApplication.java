@@ -1,4 +1,4 @@
-package com.pccw.recommendation.feedback.model;
+package com.pccw.recommendation.feedback.App;
 
 import java.util.HashMap;
 import java.util.Map;

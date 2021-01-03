@@ -8,11 +8,11 @@ public class RecomFeedbackHistory {
 	private String recommendedOffer;
 	private String feedbackType;
 	private String feedbackReason;
-	private String customerType;
+	private String productLines;
 	private String clubId;
-	private String mobileNumber;
-	private String fsa;
-	private String serviceNumber;
+	private String parentCustNum;
+	private String lineLevelKey;
+	private String lineLevelValue;
 	private String customerNumber;
 	private String staffId;
 	private String staffName;
@@ -70,14 +70,6 @@ public class RecomFeedbackHistory {
 		this.feedbackReason = feedbackReason;
 	}
 
-	public String getCustomerType() {
-		return customerType;
-	}
-
-	public void setCustomerType(String customerType) {
-		this.customerType = customerType;
-	}
-
 	public String getClubId() {
 		return clubId;
 	}
@@ -86,28 +78,36 @@ public class RecomFeedbackHistory {
 		this.clubId = clubId;
 	}
 
-	public String getMobileNumber() {
-		return mobileNumber;
+	public String getProductLines() {
+		return productLines;
 	}
 
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
+	public void setProductLines(String productLines) {
+		this.productLines = productLines;
 	}
 
-	public String getFsa() {
-		return fsa;
+	public String getParentCustNum() {
+		return parentCustNum;
 	}
 
-	public void setFsa(String fsa) {
-		this.fsa = fsa;
+	public void setParentCustNum(String parentCustNum) {
+		this.parentCustNum = parentCustNum;
 	}
 
-	public String getServiceNumber() {
-		return serviceNumber;
+	public String getLineLevelKey() {
+		return lineLevelKey;
 	}
 
-	public void setServiceNumber(String serviceNumber) {
-		this.serviceNumber = serviceNumber;
+	public void setLineLevelKey(String lineLevelKey) {
+		this.lineLevelKey = lineLevelKey;
+	}
+
+	public String getLineLevelValue() {
+		return lineLevelValue;
+	}
+
+	public void setLineLevelValue(String lineLevelValue) {
+		this.lineLevelValue = lineLevelValue;
 	}
 
 	public String getCustomerNumber() {
@@ -177,13 +177,13 @@ public class RecomFeedbackHistory {
 	@Override
 	public String toString() {
 		return "RecomFeedbackHistory [feedbackDttm=" + feedbackDttm + ", feedbackSystem=" + feedbackSystem
-				+ ", recommmendationSourceSystem=" + recommendationSourceSystem + ", recommendedOffer="
+				+ ", recommendationSourceSystem=" + recommendationSourceSystem + ", recommendedOffer="
 				+ recommendedOffer + ", feedbackType=" + feedbackType + ", feedbackReason=" + feedbackReason
-				+ ", customerType=" + customerType + ", clubId=" + clubId + ", mobileNumber=" + mobileNumber + ", fsa="
-				+ fsa + ", serviceNumber=" + serviceNumber + ", customerNumber=" + customerNumber + ", staffId="
-				+ staffId + ", staffName=" + staffName + ", teamId=" + teamId + ", teamName=" + teamName
-				+ ", channelCode=" + channelCode + ", channelName=" + channelName + ", enabledFlag=" + enabledFlag
-				+ "]";
+				+ ", productLines=" + productLines + ", clubId=" + clubId + ", parentCustNum=" + parentCustNum
+				+ ", lineLevelKey=" + lineLevelKey + ", lineLevelValue=" + lineLevelValue + ", customerNumber="
+				+ customerNumber + ", staffId=" + staffId + ", staffName=" + staffName + ", teamId=" + teamId
+				+ ", teamName=" + teamName + ", channelCode=" + channelCode + ", channelName=" + channelName
+				+ ", enabledFlag=" + enabledFlag + "]";
 	}
 
 }

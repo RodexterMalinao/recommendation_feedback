@@ -31,4 +31,6 @@ public interface RecomFeedbackService {
 
 	public boolean isRequestValid(Exchange xchg);
 
+	public void selectRecomFeedback(Exchange xchg);
+
 }

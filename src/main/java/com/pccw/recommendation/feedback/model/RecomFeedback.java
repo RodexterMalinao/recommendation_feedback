@@ -9,11 +9,11 @@ public class RecomFeedback {
 	private String recommendedOffer;
 	private String feedbackType;
 	private String feedbackReason;
-	private String customerType;
+	private String productLines;
 	private String clubId;
-	private String mobileNumber;
-	private String fsa;
-	private String serviceNumber;
+	private String parentCustNum;
+	private String lineLevelKey;
+	private String lineLevelValue;
 	private String customerNumber;
 	private String staffId;
 	private String staffName;
@@ -29,11 +29,11 @@ public class RecomFeedback {
 		this.setRecommendedOffer(recomFeedbackPost.getRecommendedOffer());
 		this.setFeedbackType(recomFeedbackPost.getFeedbackType());
 		this.setFeedbackReason(recomFeedbackPost.getFeedbackReason());
-		this.setCustomerType(recomFeedbackPost.getCustomerType());
+		this.setProductLines(recomFeedbackPost.getProductLines());
 		this.setClubId(recomFeedbackPost.getClubId());
-		this.setMobileNumber(recomFeedbackPost.getMobileNumber());
-		this.setFsa(recomFeedbackPost.getFsa());
-		this.setServiceNumber(recomFeedbackPost.getServiceNumber());
+		this.setLineLevelKey(recomFeedbackPost.getLineLevelKey());
+		this.setLineLevelValue(recomFeedbackPost.getLineLevelValue());
+		this.setParentCustNum(recomFeedbackPost.getParentCustNum());
 		this.setCustomerNumber(recomFeedbackPost.getCustomerNumber());
 		this.setStaffId(recomFeedbackPost.getStaffId());
 		this.setStaffName(recomFeedbackPost.getStaffName());
@@ -41,34 +41,6 @@ public class RecomFeedback {
 		this.setTeamName(recomFeedbackPost.getTeamName());
 		this.setChannelCode(recomFeedbackPost.getChannelCode());
 		this.setChannelName(recomFeedbackPost.getChannelName());
-	}
-
-	public RecomFeedback(int feedbackId, String feedbackDttm, String feedbackSystem, String recommendationSourceSystem,
-			String recommendedOffer, String feedbackType, String feedbackReason, String customerType, String clubId,
-			String mobileNumber, String fsa, String serviceNumber, String customerNumber, String staffId,
-			String staffName, String teamId, String teamName, String channelCode, String channelName,
-			String enabledFlag) {
-		super();
-		this.feedbackId = feedbackId;
-		this.feedbackDttm = feedbackDttm;
-		this.feedbackSystem = feedbackSystem;
-		this.recommendationSourceSystem = recommendationSourceSystem;
-		this.recommendedOffer = recommendedOffer;
-		this.feedbackType = feedbackType;
-		this.feedbackReason = feedbackReason;
-		this.customerType = customerType;
-		this.clubId = clubId;
-		this.mobileNumber = mobileNumber;
-		this.fsa = fsa;
-		this.serviceNumber = serviceNumber;
-		this.customerNumber = customerNumber;
-		this.staffId = staffId;
-		this.staffName = staffName;
-		this.teamId = teamId;
-		this.teamName = teamName;
-		this.channelCode = channelCode;
-		this.channelName = channelName;
-		this.enabledFlag = enabledFlag;
 	}
 
 	public RecomFeedback() {
@@ -131,12 +103,36 @@ public class RecomFeedback {
 		this.feedbackReason = feedbackReason;
 	}
 
-	public String getCustomerType() {
-		return customerType;
+	public String getProductLines() {
+		return productLines;
 	}
 
-	public void setCustomerType(String customerType) {
-		this.customerType = customerType;
+	public void setProductLines(String productLines) {
+		this.productLines = productLines;
+	}
+
+	public String getParentCustNum() {
+		return parentCustNum;
+	}
+
+	public void setParentCustNum(String parentCustNum) {
+		this.parentCustNum = parentCustNum;
+	}
+
+	public String getLineLevelKey() {
+		return lineLevelKey;
+	}
+
+	public void setLineLevelKey(String lineLevelKey) {
+		this.lineLevelKey = lineLevelKey;
+	}
+
+	public String getLineLevelValue() {
+		return lineLevelValue;
+	}
+
+	public void setLineLevelValue(String lineLevelValue) {
+		this.lineLevelValue = lineLevelValue;
 	}
 
 	public String getClubId() {
@@ -145,30 +141,6 @@ public class RecomFeedback {
 
 	public void setClubId(String clubId) {
 		this.clubId = clubId;
-	}
-
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
-
-	public String getFsa() {
-		return fsa;
-	}
-
-	public void setFsa(String fsa) {
-		this.fsa = fsa;
-	}
-
-	public String getServiceNumber() {
-		return serviceNumber;
-	}
-
-	public void setServiceNumber(String serviceNumber) {
-		this.serviceNumber = serviceNumber;
 	}
 
 	public String getCustomerNumber() {
@@ -238,13 +210,13 @@ public class RecomFeedback {
 	@Override
 	public String toString() {
 		return "RecomFeedback [feedbackId=" + feedbackId + ", feedbackDttm=" + feedbackDttm + ", feedbackSystem="
-				+ feedbackSystem + ", recommmendationSourceSystem=" + recommendationSourceSystem + ", recommendedOffer="
+				+ feedbackSystem + ", recommendationSourceSystem=" + recommendationSourceSystem + ", recommendedOffer="
 				+ recommendedOffer + ", feedbackType=" + feedbackType + ", feedbackReason=" + feedbackReason
-				+ ", customerType=" + customerType + ", clubId=" + clubId + ", mobileNumber=" + mobileNumber + ", fsa="
-				+ fsa + ", serviceNumber=" + serviceNumber + ", customerNumber=" + customerNumber + ", staffId="
-				+ staffId + ", staffName=" + staffName + ", teamId=" + teamId + ", teamName=" + teamName
-				+ ", channelCode=" + channelCode + ", channelName=" + channelName + ", enabledFlag=" + enabledFlag
-				+ "]";
+				+ ", productLines=" + productLines + ", clubId=" + clubId + ", parentCustNum=" + parentCustNum
+				+ ", lineLevelKey=" + lineLevelKey + ", lineLevelValue=" + lineLevelValue + ", customerNumber="
+				+ customerNumber + ", staffId=" + staffId + ", staffName=" + staffName + ", teamId=" + teamId
+				+ ", teamName=" + teamName + ", channelCode=" + channelCode + ", channelName=" + channelName
+				+ ", enabledFlag=" + enabledFlag + "]";
 	}
 
 }
