@@ -31,6 +31,7 @@ public class RecomFeedbackServiceImpl extends RecomFeedbackHelper implements Rec
 		for (Map<String, String> data : dataList) {
 
 			RecomFeedback recomFeedback = new RecomFeedback();
+			System.out.println("data.get(F_FEEDBACK_DTTM): " + String.valueOf(data.get(F_FEEDBACK_DTTM)));
 
 			recomFeedback.setFeedbackId(DataTypeUtil.stringAsInteger(data.get(F_FEEDBACK_ID)));
 			recomFeedback.setFeedbackDttm(DataTypeUtil.dateAsString(data.get(F_FEEDBACK_DTTM), DATE_FORMAT));
@@ -69,7 +70,8 @@ public class RecomFeedbackServiceImpl extends RecomFeedbackHelper implements Rec
 				+ F_ENABLED_FLAG;
 
 		String criteria = F_PARENT_CUST_NUM + " = " + "'" + xchg.getIn().getHeader("parentCustNum") + "'" + " and "
-				+ F_PRODUCT_LINES + " =" + "'" + xchg.getIn().getHeader("productLines") + "'";
+				+ F_PRODUCT_LINES + " = " + "'" + xchg.getIn().getHeader("productLines") + "'" + " and "
+				+ F_ENABLED_FLAG + " = " + "'" + ENABLE_FLAG + "'";
 
 		String query = selectStatement(columns, T_RECOM_FB, criteria);
 
@@ -177,6 +179,7 @@ public class RecomFeedbackServiceImpl extends RecomFeedbackHelper implements Rec
 	@Override
 	public void returnRecomFeedbackListByCust(Exchange xchg) {
 		String parentCustNum = String.valueOf(xchg.getIn().getHeader("parentCustNum").toString());
+		String productLines = String.valueOf(xchg.getIn().getHeader("productLines").toString());
 		System.out.println("recomFeedback : " + xchg.getIn().getBody());
 
 		String columns = F_FEEDBACK_DTTM + ", " + F_FEEDBACK_SYSTEM + ", " + F_RECOMMENDATION_SOURCE_SYSTEM + ", "
@@ -185,7 +188,9 @@ public class RecomFeedbackServiceImpl extends RecomFeedbackHelper implements Rec
 				+ ", " + F_CUSTOMER_NUMBER + ", " + F_STAFF_ID + ", " + F_STAFF_NAME + ", " + F_TEAM_ID + ", "
 				+ F_TEAM_NAME + ", " + F_CHANNEL_CODE + ", " + F_CHANNEL_NAME + ", " + F_ENABLED_FLAG;
 
-		String criteria = F_PARENT_CUST_NUM + " = " + "'" + parentCustNum + "'" + " ORDER BY " + F_FEEDBACK_ID + " ASC";
+		String criteria = F_PARENT_CUST_NUM + " = " + "'" + parentCustNum + "'" + " and " + F_PRODUCT_LINES + " = "
+				+ "'" + productLines + "'" + " and " + F_ENABLED_FLAG + " = " + "'" + ENABLE_FLAG + "'" + " ORDER BY "
+				+ F_FEEDBACK_ID + " ASC";
 
 		String query = selectStatement(columns, T_RECOM_FB, criteria);
 

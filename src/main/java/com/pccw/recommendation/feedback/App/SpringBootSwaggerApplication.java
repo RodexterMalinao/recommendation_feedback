@@ -33,7 +33,7 @@ public class SpringBootSwaggerApplication {
 		ServletRegistrationBean swagger = new ServletRegistrationBean(new DefaultCamelSwaggerServlet(), "/api-doc/*");
 		Map<String, String> params = new HashMap<>();
 		params.put("base.path", "api/v1/recommendation/feedback/");
-		params.put("api.title", "my api title");
+		params.put("api.title", "Recommendation Feedback");
 		params.put("api.description", "my api description");
 		params.put("api.termsOfServiceUrl", "termsOfServiceUrl");
 		params.put("api.license", "license");

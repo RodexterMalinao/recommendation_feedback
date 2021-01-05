@@ -33,11 +33,15 @@ public class RecomFeedbackHelper extends SQLHelper {
 	public static final String F_CHANNEL_NAME = "channel_name";
 	public static final String F_ENABLED_FLAG = "enabled_flag";
 
+	public static final String ENABLE_FLAG = "Y";
+	public static final String DISABLE_FLAG = "N";
+
 	public static final String DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
 
 	public static final ImmutableList<String> mandatoryFields = ImmutableList.of(F_STAFF_ID, F_STAFF_NAME,
 			F_FEEDBACK_SYSTEM, F_PRODUCT_LINES, F_RECOMMENDATION_SOURCE_SYSTEM, F_RECOMMENDED_OFFER, F_FEEDBACK_TYPE,
-			F_TEAM_ID, F_TEAM_NAME, F_CHANNEL_CODE, F_CHANNEL_NAME);
+			F_TEAM_ID, F_TEAM_NAME, F_CHANNEL_CODE, F_CHANNEL_NAME, F_PARENT_CUST_NUM, F_LINE_LEVEL_KEY,
+			F_LINE_LEVEL_VALUE);
 
 	public boolean isMandatoryValid(RecomFeedback recomFeedback) {
 
@@ -72,6 +76,15 @@ public class RecomFeedbackHelper extends SQLHelper {
 			return false;
 		}
 		if (StringUtils.isEmpty(recomFeedback.getChannelName())) {
+			return false;
+		}
+		if (StringUtils.isEmpty(recomFeedback.getParentCustNum())) {
+			return false;
+		}
+		if (StringUtils.isEmpty(recomFeedback.getLineLevelKey())) {
+			return false;
+		}
+		if (StringUtils.isEmpty(recomFeedback.getLineLevelValue())) {
 			return false;
 		}
 		return true;
@@ -112,6 +125,15 @@ public class RecomFeedbackHelper extends SQLHelper {
 		}
 		if (StringUtils.isEmpty(recomFeedback.getChannelName())) {
 			invFields.add(F_CHANNEL_NAME);
+		}
+		if (StringUtils.isEmpty(recomFeedback.getParentCustNum())) {
+			invFields.add(F_PARENT_CUST_NUM);
+		}
+		if (StringUtils.isEmpty(recomFeedback.getLineLevelKey())) {
+			invFields.add(F_LINE_LEVEL_KEY);
+		}
+		if (StringUtils.isEmpty(recomFeedback.getLineLevelValue())) {
+			invFields.add(F_LINE_LEVEL_VALUE);
 		}
 		return String.join(",", invFields);
 	}

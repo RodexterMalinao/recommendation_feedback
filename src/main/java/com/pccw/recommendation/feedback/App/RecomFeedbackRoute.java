@@ -73,6 +73,7 @@ public class RecomFeedbackRoute extends RouteBuilder {
 			public void process(Exchange xchg) throws Exception {
 				RecomFeedbackPost recomFeedback = xchg.getIn().getBody(RecomFeedbackPost.class);
 				xchg.getIn().setHeader("parentCustNum", recomFeedback.getParentCustNum());
+				xchg.getIn().setHeader("productLines", recomFeedback.getProductLines());
 			}
 		});
 
