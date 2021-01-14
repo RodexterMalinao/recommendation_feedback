@@ -6,10 +6,20 @@ public final class ErrorResponseUtil {
 
 	public static final HashMap<Integer, String> responseCodes = new HashMap<>();
 
-	public static final int STATUS_CODE_MANDATORY = 600;
+	public static final int STATUS_CODE_MANDATORY = 480;
+	public static final int STATUS_CODE_FEEDBACK_REASON = 481;
+	public static final int STATUS_CODE_CLUB_ID = 482;
+	public static final int STATUS_CODE_LINE_LEVEL_KEY = 483;
+	public static final int STATUS_CODE_LINE_LEVEL_VALUE = 484;
+	public static final int STATUS_CODE_PARENT_CUST_NUM = 485;
 
 	static {
 		responseCodes.put(STATUS_CODE_MANDATORY, "The following fields are required : ");
+		responseCodes.put(STATUS_CODE_FEEDBACK_REASON, " feedbackReason is not null if feedback_type is “REJECT” ");
+		responseCodes.put(STATUS_CODE_CLUB_ID, " clubId is not null if product_lines is “CLUB” ");
+		responseCodes.put(STATUS_CODE_LINE_LEVEL_KEY, " lineLevelKey is not null if product_lines <> “CLUB” ");
+		responseCodes.put(STATUS_CODE_LINE_LEVEL_VALUE, " lineLevelValue is not null if product_lines <> “CLUB” ");
+		responseCodes.put(STATUS_CODE_PARENT_CUST_NUM, " parentCustNum is not null if product_lines <> “CLUB” ");
 //		responseCodes.put(3, "thirty");
 //		responseCodes.put(4, "forty");
 //		responseCodes.put(5, "fifty");
